@@ -182,3 +182,25 @@ async def credit_card_number_validation(payload: Request):
     else:
         'Error : Credit card not valid'
 
+@app.post("/reference_number_validation")
+async def reference_number_validation(payload : Request):   
+    value_dict = await payload.json()
+    dbase = sqlite3.connect('M3_database.db', isolation_level = None)
+
+    query_session = dbase.execute('''
+                    SELECT reference_number
+                    FROM invoice 
+                    WHERE subscription_id = {}'''.format(str(value_dict['subscription_id'])))
+    refnum = query_session.fetchone
+    if refnum != value_dict['reference_number']:
+        return 'error'
+    status = dbase.execute('''
+            UPDATE invoice
+            SET status = 1
+            WHERE reference_number = {reference_number} 
+            '''.format(reference_number = value_dict['reference_number']))
+    dbase.close
+    return "Reference number {reference_number} is correct".format(reference_number = value_dict['reference_number'])
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='127.0.0.1', port=4000)
