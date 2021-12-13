@@ -120,7 +120,23 @@ async def changeSubscriptionStatus(payload: Request):
         dbase.close()
         return True
    
+@app.post("/create_invoice")
+async def create_invoice (payload: Request):
+    values_dict = await payload.json()
 
+    # Open the DB
+    dbase = sqlite3.connect(DBNAME, isolation_level=None) 
+   #ajouter custom_id dans quote (=relation one to many de custom vers quote dans la dbase)
+    query_price= dbase.execute(''' 
+                    SELECT price FROM quote
+                    WHERE customer_id = {}               
+                    '''.format(str(values_dict['customer_id'])))
+    price_invoice = query_price.fetchall()[0][0]
+    #ajouter quote_id dans invoice (=relation one to many de custom vers quote)
+    dbase.execute('''
+            INSERT INTO invoice(companies_id, quote_id, payment_status, price) 
+            VALUES ({Company}, {Quote}, {Status}, {Price})             
+            '''.format(student=str(values_dict['companies_id']), quote=str(values_dict['quote_id']), status=bool(values_dict['payment_status']), price=float(price_invoice)))
 
 @app.get("/get-pending-invoices")
 async def getPendingInvoices(payload: Request):
