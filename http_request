@@ -1,0 +1,88 @@
+POST http://127.0.0.1:8000/create_company_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "VAT_id": "1",
+    "company_name": "AAA",
+    "bank_account": "12345",
+    "city":"Brussels",
+    "zip_code":"1000",
+    "street_name":"Albert",
+    "box_number":"7"
+
+}
+
+###
+
+POST http://127.0.0.1:8000/create_customer_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "customer_id": "1",
+    "family_name": "Wout",
+    "first_name": "Gus",
+    "bank_account":"5678"
+}
+
+### 
+POST http://127.0.0.1:8000/create-quote HTTP/1.1
+Content-Type: application/json
+
+{
+    "subID": "1",
+    "quantity": "Wout",
+    "currency": "Gus",
+    "price":"170"
+}
+
+###
+POST http://127.0.0.1:8000/change-subscription-status HTTP/1.1
+Content-Type: application/json
+
+{
+    "companies_id": "1",
+    "custom_id": "1",
+    "activation_status": "1",
+    "activationStatus": "1",
+    "companyID":"1",
+    "companyID":"1"
+}
+
+###
+
+POST http://127.0.0.1:8000/create_invoice HTTP/1.1
+Content-Type: application/json
+
+{
+    "companies_id": "1",
+    "quote_id": "1",
+    "customer_id": "1",
+    "payment_status":"1",
+}
+
+###
+
+GET http://127.0.0.1:8000/get-pending-invoices HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "custom_id": "1"
+}
+###
+POST http://127.0.0.1:8000/credi_card_number_validation HTTP/1.1
+Content-Type: application/json
+
+{
+    "credit_card_number": "1",
+   
+}
+
+###
+POST http://127.0.0.1:8000/reference_number_validation HTTP/1.1
+Content-Type: application/json
+
+{
+    "subscription_id": "1",
+    "reference_number":"1",
+   
+}
