@@ -132,3 +132,53 @@ async def getPendingInvoices(payload: Request):
     dbase.close()
     return res
 
+@app.post("/credi_card_number_validation")
+async def credit_card_number_validation(payload: Request):
+    values_dict = await payload.json()
+    credit_card_number = values_dict['credit_card_number']
+    a = len(credit_card_number)
+    def digit(n):
+        return [int(d) for d in str(n)]
+    cardlist = (digit(credit_card_number))  
+    checking_digit = cardlist[a-1]
+    del cardlist[a-1]
+    print(cardlist, checking_digit)
+
+    def reverse(n):
+        idx = a-2
+        newlist = []
+        while idx >= 0:
+            newlist.append(n[idx])
+            idx = idx - 1
+        return newlist
+
+    new_list = reverse(cardlist)
+    print(new_list)
+
+    def odd_function(n):
+        index = 0
+        while index < a-1:
+            if index % 2 == 0:  
+                n[index] = n[index]*2
+                if n[index] > 9 :
+                    n[index] = n[index] - 9
+            index = index + 1
+        return(n)
+
+    odd_list = odd_function(new_list)
+    print(odd_list)
+
+    total = 0
+    ind = 0
+    while ind < a-1:
+        total = total + odd_list[ind]
+        ind = ind + 1
+    print(total)
+    print(checking_digit)
+    Total_amount = total + checking_digit
+    print(Total_amount)
+    if Total_amount % 10 == 0:
+        return 'Credit card valid'
+    else:
+        'Error : Credit card not valid'
+
