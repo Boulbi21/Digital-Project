@@ -126,6 +126,20 @@ async def create_invoice (payload: Request):
 
     # Open the DB
     dbase = sqlite3.connect(DBNAME, isolation_level=None) 
+    
+     if not ("companies_id" in values_dict) \
+            or not ("quote_id" in values_dict) \
+            or not ("customer_id" in values_dict) \
+            or not ("payment_status" in values_dict):
+        return "Error: an error occured. Please try again."
+
+    if type(values_dict["companies_id"]) is not int \
+        or type(values_dict["quote_id"]) is not int \
+        or type(values_dict["customer_id"]) is not int \
+        or type(values_dict["payment_status"]) is not bool :
+
+        return "Error: an error occured. Please try again."
+
    #ajouter custom_id dans quote (=relation one to many de custom vers quote dans la dbase)
     query_price= dbase.execute(''' 
                     SELECT price FROM quote
