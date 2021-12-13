@@ -1,0 +1,9 @@
+url = 'https://v6.exchangerate-api.com/v6/YOUR API KEY/pair/EUR/{}/{}'
+
+def converter(currency,amountUSD):
+    amountconverter= requests.get(url.format(currency,amountUSD)).json()
+    amountEUR=amountconverter["conversion_result"]
+    return amountEUR
+
+EURamount=converter("USD",'1')
+print('EUR '+ str(EURamount))
