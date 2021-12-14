@@ -32,7 +32,7 @@ dbase.execute('''
 
 dbase.execute(''' 
         CREATE TABLE IF NOT EXISTS Invoice(
-            Reference_number INTEGER PRIMARY KEY NOT NULL,
+            Reference_number INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
             Payment_status BOOL,
             Month TEXT NOT NULL,
             Quotation_id INTEGER NOT NULL,
