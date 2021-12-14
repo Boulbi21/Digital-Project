@@ -55,6 +55,7 @@ dbase.execute ('''
             Quote_id INTEGER PRIMARY KEY,
             Currency TEXT NOT NULL,
             Customer_id INT NOT NULL,
+            Total_price INT NOT NULL,
             FOREIGN KEY (Customer_id) REFERENCES Customers(User_name))
             ''')
 
