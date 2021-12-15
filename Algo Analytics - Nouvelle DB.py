@@ -1,7 +1,6 @@
 import sqlite3
 from fastapi import FastAPI, Request
 import uvicorn
-import sqlite3
 
 app = FastAPI()
 
