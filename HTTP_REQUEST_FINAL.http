@@ -1,0 +1,140 @@
+POST http://127.0.0.1:6000/create_company_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "Company_id": "1",
+    "company_name": "AAA",
+    "bank_account": "12345",
+    "city":"Brussels",
+    "zip_code":"1000",
+    "street_name":"Albert",
+    "box_number":"7"
+
+}
+
+###
+
+POST http://127.0.0.1:6000/create_customer_account HTTP/1.1
+Content-Type: application/json
+
+{
+    "User_name": "1",
+    "family_name": "Wout",
+    "first_name": "Gus",
+    "bank_account":"5678",
+    "Companies_id":"1"
+}
+
+### 
+POST http://127.0.0.1:6000/create_quote HTTP/1.1
+Content-Type: application/json
+
+{
+    "Customer_id": "1",
+    "Company_id": "1",
+    "Activation_status": "0",
+    "Total_price": "0"
+}
+###
+POST http://127.0.0.1:6000/create_subscription HTTP/1.1
+Content-Type: application/json
+
+{
+    "Activation_status": "0"
+}
+###
+
+POST http://127.0.0.1:6000/create-quote-line-item HTTP/1.1
+Content-Type: application/json
+
+{
+    "quantity": "3",
+    "price":"170",
+    "Currency":"USD",
+    "quote_id":"1"
+}
+###
+
+POST http://127.0.0.1:6000/create-quote-line-item HTTP/1.1
+Content-Type: application/json
+
+{
+    "quantity": "1",
+    "price":"100",
+    "Currency":"EUR",
+    "quote_id":"1"
+}
+
+###
+
+
+POST http://127.0.0.1:6000/update_quote HTTP/1.1
+Content-Type: application/json
+
+{
+    "quote_id": "1"
+}
+###
+GET http://127.0.0.1:6000/check_quote HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "customer_id": "1"
+}
+###
+POST http://127.0.0.1:6000/change-quote-status HTTP/1.1
+Content-Type: application/json
+
+{
+    "Custom_id": "1",
+    "Quote_id":"1"
+}
+###
+
+POST http://127.0.0.1:6000/create_invoice HTTP/1.1
+Content-Type: application/json
+
+{
+    "quote_id": "1",
+    "payment_status": "0",
+    "month": "déc",
+    "year":"2021",
+    "customer_id":"1",
+    "Credit_card_validated":"O"
+}
+
+###
+GET http://127.0.0.1:6000/get_quote_number HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "Customer_id": "1"
+}
+###
+GET http://127.0.0.1:6000/get-pending-invoices HTTP/1.1
+Content-Type: application/json
+
+{ 
+    "Quotation_id": "1"
+}
+###
+POST http://127.0.0.1:6000/credit_card_number_validation HTTP/1.1
+Content-Type: application/json
+
+{
+    "credit_card_number": "1111222233334444",
+    "quote_id":"1",
+    "month":"déc"
+   
+}
+
+###
+POST http://127.0.0.1:6000/ref_num_validation HTTP/1.1
+Content-Type: application/json
+
+{
+    "quote_id": "1",
+    "reference_number":"1",
+    "month": "déc"
+}
+####
